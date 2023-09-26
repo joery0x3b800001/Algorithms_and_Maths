@@ -1,0 +1,379 @@
+// **------Directed and Undirected graph in C++ -------* //
+Here are two sample implementations of directed and undirected graphs in C++:
+
+1. Implementing a directed graph:
+
+```
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Graph {
+  int V; // number of vertices
+  vector<int> *adj; // pointer to an array containing adjacency lists
+
+public:
+  Graph(int V) { // constructor
+    this->V = V;
+    adj = new vector<int>[V];
+  }
+
+  void addEdge(int u, int v) { // function to add an edge to the graph
+    adj[u].push_back(v);
+  }
+
+  void printGraph() { // function to print the graph
+    for (int i = 0; i < V; i++) {
+      cout << "Adjacency list of vertex " << i << ": ";
+      for (auto j: adj[i]) {
+        cout << j << " ";
+      }
+      cout << endl;
+    }
+  }
+};
+
+int main() {
+  Graph g(4); // create a graph with 4 vertices
+  g.addEdge(0, 1);
+  g.addEdge(0, 2);
+  g.addEdge(1, 2);
+  g.addEdge(2, 0);
+  g.addEdge(2, 3);
+  g.addEdge(3, 3);
+  g.printGraph();
+  return 0;
+}
+```
+
+2. Implementing an undirected graph:
+
+```
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Graph {
+  int V; // number of vertices
+  vector<int> *adj; // pointer to an array containing adjacency lists
+
+public:
+  Graph(int V) { // constructor
+    this->V = V;
+    adj = new vector<int>[V];
+  }
+
+  void addEdge(int u, int v) { // function to add an edge to the graph
+    adj[u].push_back(v);
+    adj[v].push_back(u); // for an undirected graph, add the edge in both directions
+  }
+
+  void printGraph() { // function to print the graph
+    for (int i = 0; i < V; i++) {
+      cout << "Adjacency list of vertex " << i << ": ";
+      for (auto j: adj[i]) {
+        cout << j << " ";
+      }
+      cout << endl;
+    }
+  }
+};
+
+int main() {
+  Graph g(4); // create a graph with 4 vertices
+  g.addEdge(0, 1);
+  g.addEdge(0, 2);
+  g.addEdge(1, 2);
+  g.addEdge(2, 3);
+  g.printGraph();
+  return 0;
+}
+```
+
+In both cases, we have used the vector container of the STL to represent the adjacency list of each vertex. The addEdge function adds an edge between two vertices u and v, and the printGraph function prints the adjacency list of each vertex. However, in the case of an undirected graph, we add the edge in both directions to make it symmetric.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **------ Weighted and Unweighted graph in C++ -------* //
+Here are two sample implementations of weighted and unweighted graphs in C++:
+
+1. Implementing an unweighted graph:
+
+```
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Graph {
+  int V; // number of vertices
+  vector<int> *adj; // pointer to an array containing adjacency lists
+
+public:
+  Graph(int V) { // constructor
+    this->V = V;
+    adj = new vector<int>[V];
+  }
+
+  void addEdge(int u, int v) { // function to add an edge to the graph
+    adj[u].push_back(v);
+    adj[v].push_back(u); // for an undirected graph, add the edge in both directions
+  }
+
+  void printGraph() { // function to print the graph
+    for (int i = 0; i < V; i++) {
+      cout << "Adjacency list of vertex " << i << ": ";
+      for (auto j: adj[i]) {
+        cout << j << " ";
+      }
+      cout << endl;
+    }
+  }
+};
+
+int main() {
+  Graph g(4); // create a graph with 4 vertices
+  g.addEdge(0, 1);
+  g.addEdge(0, 2);
+  g.addEdge(1, 2);
+  g.addEdge(2, 3);
+  g.printGraph();
+  return 0;
+}
+```
+
+2. Implementing a weighted graph:
+
+```
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Edge {
+public:
+  int src, dest, weight;
+};
+
+class Graph {
+  int V, E; // number of vertices and edges
+  Edge *edge; // pointer to an array of edges
+
+public:
+  Graph(int V, int E) { // constructor
+    this->V = V;
+    this->E = E;
+    edge = new Edge[E];
+  }
+
+  void addEdge(int u, int v, int w, int i) { // function to add an edge to the graph
+    edge[i].src = u;
+    edge[i].dest = v;
+    edge[i].weight = w;
+  }
+
+  void printGraph() { // function to print the graph
+    for (int i = 0; i < E; i++) {
+      cout << "Edge " << i << ": (" << edge[i].src << ", " << edge[i].dest << ", " << edge[i].weight << ")" << endl;
+    }
+  }
+};
+
+int main() {
+  int V = 4, E = 5;
+  Graph g(V, E); // create a graph with 4 vertices and 5 edges
+  g.addEdge(0, 1, 10, 0);
+  g.addEdge(0, 2, 20, 1);
+  g.addEdge(1, 2, 30, 2);
+  g.addEdge(2, 3, 40, 3);
+  g.addEdge(3, 1, 50, 4);
+  g.printGraph();
+  return 0;
+}
+```
+
+In the first example, we have implemented an unweighted graph using the vector container of the STL to represent the adjacency list, just like in the previous example. However, in this implementation, we have not included any weights on the edges.
+
+In the second example, we have implemented a weighted graph by creating a separate Edge class to store the source vertex, destination vertex, and the weight of each edge. We have also created an array of edges and used it to store the details of each edge. The addEdge function added an edge to the edge array and the printGraph function printed the details of all edges.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// **-------- Alternate Weighted Graph in C++ (Without using the Edge pointer) --------** //
+Here's how you can create a weighted graph in C++ without using the edge pointers:
+
+```
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Graph {
+  int V; // number of vertices
+  vector<pair<int,int>> *adj; // pointer to an array containing adjacency lists
+
+public:
+  Graph(int V) { // constructor
+    this->V = V;
+    adj = new vector<pair<int,int>>[V];
+  }
+
+  void addEdge(int u, int v, int w) { // function to add an edge to the graph
+    adj[u].push_back(make_pair(v,w));
+    adj[v].push_back(make_pair(u,w)); // for an undirected graph, add the edge in both directions
+  }
+
+  void printGraph() { // function to print the graph
+    for (int i = 0; i < V; i++) {
+      cout << "Adjacency list of vertex " << i << ": ";
+      for (auto j: adj[i]) {
+        cout << "(" << j.first << "," << j.second << ") ";
+      }
+      cout << endl;
+    }
+  }
+};
+
+int main() {
+  Graph g(4); // create a graph with 4 vertices
+  g.addEdge(0, 1, 10);
+  g.addEdge(0, 2, 20);
+  g.addEdge(1, 2, 30);
+  g.addEdge(2, 3, 40);
+  g.addEdge(3, 1, 50);
+  g.printGraph();
+  return 0;
+}
+```
+
+In this implementation, the adjacency list for each vertex is represented by a vector of pairs, where each pair contains the vertex number and the weight of the edge. The addEdge function adds an edge between two vertices u and v with weight w, and the printGraph function prints the adjacency list of each vertex along with the weights of the edges.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// *--------- Disconnected and Connected Graphs ------------* //
+
+Here is an example code to check if a graph is connected or disconnected in C++:
+
+```
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+vector<int> adj[1000];
+bool visited[1000];
+
+void bfs(int s) {
+    queue<int> q;
+    q.push(s);
+    visited[s] = true;
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        for (int v : adj[u]) {
+            if (!visited[v]) {
+                visited[v] = true;
+                q.push(v);
+            }
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    for (int i = 0; i < m; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    int start = 1;
+    bfs(start);
+
+    bool connected = true;
+    for (int i = 1; i <= n; i++) {
+        if (!visited[i]) {
+            connected = false;
+            break;
+        }
+    }
+
+    if (connected) {
+        cout << "The graph is connected." << endl;
+    } else {
+        cout << "The graph is disconnected." << endl;
+    }
+
+    return 0;
+}
+```
+
+First, we read in the number of vertices `n` and the number of edges `m` in the graph. Then, we read in the edges and build the adjacency list.
+
+Next, we perform breadth-first search starting from vertex 1. We mark all visited vertices as we go along.
+
+Finally, we check if there are any vertices that were not visited during the BFS. If there are, then the graph is disconnected. Otherwise, the graph is connected.
